@@ -1,0 +1,4 @@
+repository "WeirdCatGameP3Rush/WeirdCatGame@1375646663264@cloud"
+  path "/"
+    br "/main"
+    co "/main"
