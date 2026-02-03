@@ -32,9 +32,14 @@ public class PlayerCtrl : MonoBehaviour
             rb2d.AddForce(jump * jumpForce, ForceMode2D.Force);
             isGrounded = false;
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.J))
         {
             var bulletClone = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
+        }
+        if (health <= 0)
+        {
+            Debug.Log("Game Over!");
+            Destroy(gameObject);
         }
     }
     private void FixedUpdate()

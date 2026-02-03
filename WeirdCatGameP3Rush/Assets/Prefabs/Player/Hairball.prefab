@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092bb39034474464a87cc51ef1e77b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 5
   rbBullet: {fileID: 1502148984555467962}
