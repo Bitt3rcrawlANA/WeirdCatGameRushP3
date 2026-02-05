@@ -199,3 +199,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rbBullet: {fileID: 1502148984555467962}
+  dmg: 2

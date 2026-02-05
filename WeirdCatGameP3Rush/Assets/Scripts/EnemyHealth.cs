@@ -1,8 +1,9 @@
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
-public class Birds : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-
+    public float health;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,9 +17,13 @@ public class Birds : MonoBehaviour
     {
 
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    public void TakeDamage(float damage)
     {
-        Debug.Log("Field of View Entered!");
-    }
+        health -= damage;
 
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
