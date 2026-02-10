@@ -29,9 +29,13 @@ public class Glires : MonoBehaviour
             rb2d.linearVelocity = new Vector2(-speed, 0);
         }
 
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.2f && currentPoint == pointB.transform)
         {
             currentPoint = pointA.transform;
+        }
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.2f && currentPoint == pointA.transform)
+        {
+            currentPoint = pointB.transform;
         }
     }
 
