@@ -4,7 +4,8 @@ public class Glires : MonoBehaviour
 {
     public GameObject pointA;
     public GameObject pointB;
-    private Rigidbody2D rb2d;
+    public GameObject Cat;
+    private Rigidbody2D rb;
     private Transform currentPoint;
     public float speed;
 
@@ -12,7 +13,7 @@ public class Glires : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
     }
 
@@ -22,11 +23,11 @@ public class Glires : MonoBehaviour
         Vector2 point = currentPoint.position - transform.position;
         if (currentPoint == pointB.transform)
         {
-            rb2d.linearVelocity = new Vector2(speed, 0);
+            rb.linearVelocity = new Vector2(speed, 0);
         }
         else
         {
-            rb2d.linearVelocity = new Vector2(-speed, 0);
+            rb.linearVelocity = new Vector2(-speed, 0);
         }
 
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.2f && currentPoint == pointB.transform)

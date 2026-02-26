@@ -1,28 +1,41 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Birds : MonoBehaviour
 {
-    public GameObject Cat;
-    Vector2 direction;
+    Rigidbody2D rb;
+    public Transform cat;
     public float speed = 2f;
+    Vector2 direction;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cat)
+        {
+            Vector3 moveDirection = (cat.position - transform.position).normalized;
+            direction = moveDirection;
+        }
+    }
 
+    private void FixedUpdate()
+    {
+        if (cat)
+        {
+            rb.linearVelocity = new Vector2(direction.x, direction.y) * speed;
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        EnemyHealth enemy = collision.gameObject.GetComponent<BoxCollider2D>();
         Debug.Log("Field of View Entered!");
-        if (other.gameObject.tag == ""Player")
     }
 
 }
