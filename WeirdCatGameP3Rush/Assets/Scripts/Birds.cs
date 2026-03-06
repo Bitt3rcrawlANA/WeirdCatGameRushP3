@@ -6,9 +6,10 @@ using UnityEngine.EventSystems;
 public class Birds : MonoBehaviour
 {
     Rigidbody2D rb;
-    public Transform cat;
+    public Transform catTra;
     public float speed = 2f;
     Vector2 direction;
+    private bool found = false;
 
 
     private void Awake()
@@ -19,23 +20,25 @@ public class Birds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cat)
+        if (found == true)
         {
-            Vector3 moveDirection = (cat.position - transform.position).normalized;
+            Vector3 moveDirection = (catTra.position - transform.position).normalized;
             direction = moveDirection;
+            rb.linearVelocity = new Vector2(direction.x, direction.y) * speed;
         }
     }
 
     private void FixedUpdate()
     {
-        if (cat)
-        {
-            rb.linearVelocity = new Vector2(direction.x, direction.y) * speed;
-        }
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Field of View Entered!");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Field of View Entered!");
+            found = true;
+        }
     }
 
 }

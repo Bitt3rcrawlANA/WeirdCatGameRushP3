@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Glires : MonoBehaviour
+public class GlireMove : MonoBehaviour
 {
     public GameObject pointA;
     public GameObject pointB;
@@ -13,6 +13,7 @@ public class Glires : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Flip();
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
     }
@@ -32,10 +33,12 @@ public class Glires : MonoBehaviour
 
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.2f && currentPoint == pointB.transform)
         {
+            Flip();
             currentPoint = pointA.transform;
         }
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.2f && currentPoint == pointA.transform)
         {
+            Flip();
             currentPoint = pointB.transform;
         }
     }
@@ -43,5 +46,12 @@ public class Glires : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Field of View Entered!");
+    }
+
+    private void Flip()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }
