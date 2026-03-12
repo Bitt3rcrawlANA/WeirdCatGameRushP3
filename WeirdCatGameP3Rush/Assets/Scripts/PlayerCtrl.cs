@@ -9,10 +9,12 @@ public class PlayerCtrl : MonoBehaviour
     public float jumpForce;
     public float speed;
     public bool isGrounded;
+    public HealingItem ohwow;
 
     Rigidbody2D rb2d;
 
-    public int health;
+    public int maxHealth = 15;
+    int currentHealth;
 
     public GameObject bullet;
 
@@ -21,6 +23,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         jump = new Vector2(0.0f, 3.0f);
+
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -36,19 +40,27 @@ public class PlayerCtrl : MonoBehaviour
         {
             var bulletClone = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
         }
-        if (health <= 0)
-        {
-            Debug.Log("Game Over!");
-            Destroy(gameObject);
-        }
     }
     private void FixedUpdate()
     {
         rb2d.linearVelocity = new Vector2(moveHorizontal * speed, rb2d.linearVelocity.y);
     }
 
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D other)
     {
-        isGrounded = true;
+
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            ChangeHealth(-1);
+        }
+    }
+    public void ChangeHealth(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log(currentHealth + "/" + maxHealth);
     }
 }
