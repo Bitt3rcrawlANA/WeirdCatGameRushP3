@@ -4,10 +4,11 @@ public class GlireMove : MonoBehaviour
 {
     public GameObject pointA;
     public GameObject pointB;
-    public GameObject Cat;
     private Rigidbody2D rb;
     private Transform currentPoint;
     public float speed;
+
+    public bool coward = true;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,9 +44,13 @@ public class GlireMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Field of View Entered!");
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("Field of View Entered!");
+            coward = true;
+        }
     }
 
     private void Flip()
